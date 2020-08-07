@@ -18,27 +18,27 @@ public class YahooSearchMain {
 		driver = new ChromeDriver();  //arranca el navegador, obvio Chrome
 		driver.manage().timeouts().implicitlyWait(30,  TimeUnit.SECONDS); //configura las esperas implicitas hasta 30 segundos
 		driver.get("http://www.yahoo.com"); //navega a la url que le indiquemos
-		WebElement searchBox = driver.findElement(By.id("header-search-input"));
-		WebElement searchButton = driver.findElement(By.id("header-desktop-search-button"));
+		WebElement searchBox = driver.findElement(By.id("header-search-input")); // busca elemento caja de bsqueda
+		WebElement searchButton = driver.findElement(By.id("header-desktop-search-button")); // busca elemento de icono de busqueda
 		
-		searchBox.clear();
-		searchBox.sendKeys("Selenium");
+		searchBox.clear(); // limpia caja de texto
+		searchBox.sendKeys("Selenium"); // inserta texto en el campo
 		searchButton.click();
 		
-		WebElement seleniumLink = driver.findElement(By.xpath("//h3[.='Selenium' and ./following-sibling::div[contains(.,'selenium.dev')] ] /a"));
+		WebElement seleniumLink = driver.findElement(By.xpath("//h3[.='Selenium' and ./following-sibling::div[contains(.,'selenium.dev')] ] /a"));// encontro un elemento con xpath que contenga la palabara selenium
 		seleniumLink.click();
 		
-		ArrayList<String> windowIds = new ArrayList<String>(driver.getWindowHandles());
-		System.out.println("Number of windows: " + windowIds.size());
+
+		System.out.println("Number of windows: " + driver.getWindowHandles().size()); // se obtiene el numero de ventanas abiertas
 		
-		for(String windowId: driver.getWindowHandles()) {
-			driver.switchTo().window(windowId);
+		for(String windowId: driver.getWindowHandles()) { // obtiene la lista de ventanas
+			driver.switchTo().window(windowId); // pasa de una ventana a otra
 		}
 		
-		WebElement downloadLink = driver.findElement(By.linkText("Downloads"));
-		downloadLink.click();
+		WebElement downloadLink = driver.findElement(By.linkText("Downloads")); // busca el elemento de descargas
+		downloadLink.click(); // da clic en el enlace
 		
-		driver.quit();
+		driver.quit(); // cierra todo
 
 	}
 
