@@ -1,6 +1,6 @@
 package bIntro;
 
 public class Constants {
-    public static final String USUARIO = "tzmedel@gmail.com";
-    public static final String PASSWORD = "Prueba123";
+    public static final String USUARIO = "sisther_33@hotmail.com";
+    public static final String PASSWORD = "test123";
 }

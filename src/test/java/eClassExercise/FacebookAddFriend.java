@@ -66,12 +66,18 @@ public class FacebookAddFriend {
 	} 
 
 	private static void agregarAmigo(String string) {
-		
+		driver.findElement(By.name("q")).sendKeys(string);
+		WebElement buscarboton= driver.findElement(By.xpath("//*[@data-testid='facebar_search_button']"));
+		buscarboton.click();
+		// buscar boton y dar clic en agregar
 
 	}
 
 	private static void buscarAmigo(String string) {
-
+		// revisar apuntador de la barra de agragr amigo
+		driver.findElement(By.name("q")).sendKeys(string);
+		WebElement buscarboton= driver.findElement(By.xpath("//*[@data-testid='facebar_search_button']"));
+		buscarboton.click();
 	}
 
 

@@ -2,8 +2,6 @@ package eClassExercise;
 
 public class Celular {
 
-
-
     String marcaModelo;
     String nombre;
     double precio;
@@ -49,6 +47,7 @@ public class Celular {
     public void setCapacidadGb(int capacidadGb) {
         this.capacidadGb = capacidadGb;
     }
+
 
 
 }

@@ -12,14 +12,14 @@ public class TelcelSeleccionarArticulo {
 
     static WebDriver driver;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         navegarSitio("https://www.telcel.com");
         verificarLandingPage();
         listarTelefonos();
         seleccionarEstado("Jalisco");
         verificarPaginaResultados();
-        Celular primerCelular;
-        primerCelular = capturarDatosCelular(1);
+        //Celular primerCelular;
+        Celular primerCelular = capturarDatosCelular(1);
         seleccionarCelular(1);
         validarDatosCelular(primerCelular);
     }
@@ -117,6 +117,27 @@ public class TelcelSeleccionarArticulo {
         celular.click();
     }
 
-    private static void validarDatosCelular(Celular primerCelular) {
+    private static void validarDatosCelular(Celular cel) throws Exception {
+        WebElement nombreEquipo = driver.findElement(By.cssSelector(".ecommerce-ficha-tecnica-opciones-compra-titulo #ecommerce-ficha-tecnica-nombre"));
+        String nombreEquipoCel = nombreEquipo.getText();
+
+        WebElement elemPrecioEquipo = driver.findElement(By.cssSelector(".ecommerce-ficha-tecnica-precio-pagos #ecommerce-ficha-tecnica-precio-obj"));
+        String precioEquipo = elemPrecioEquipo.getText();
+        double precio = Double.parseDouble(precioEquipo.replace("$", "").replace(",", ""));
+        //.telcel-mosaico-equipos-capacidad-numero
+
+        WebElement elemCapacidad = driver.findElement(By.cssSelector("li[ng-repeat*='capacidades'] a"));
+
+        String capacidad = elemCapacidad.getText();
+        int capac = Integer.parseInt(capacidad.split(" ")[0]);
+
+        if(cel.getNombre().equals(nombreEquipoCel)
+                && cel.getPrecio() == precio
+                && cel.getCapacidadGb() == capac) {
+            System.out.println("Los datos coinciden");
+        } else {
+            System.out.println("Los datos  no coinciden");
+            throw new Exception("Los datos  no coinciden");
+        }
     }
 }
